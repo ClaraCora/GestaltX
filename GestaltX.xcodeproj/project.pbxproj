@@ -20,6 +20,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A671BC8CF07E4D73975D7912 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3657C2D1303730E800908AE2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3657C2D8303730E800908AE2;
+			remoteInfo = GestaltX;
+		};
 		F569702176BDA756E86027C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3657C2D1303730E800908AE2 /* Project object */;
@@ -44,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A671BC8CF07E4D73975D7913 /* GestaltXNavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = GestaltXNavigationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4C01D754C14C8B9BB28F96 /* ItemProviderLoad.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ItemProviderLoad.swift; sourceTree = "<group>"; };
 		2EF2633193BB80FFC35C8F39 /* App-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "App-Info.plist"; sourceTree = "<group>"; };
 		3657C2D9303730E800908AE2 /* GestaltX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestaltX.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +69,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A671BC8CF07E4D73975D7914 /* NavigationUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = tests/NavigationUITests;
+			sourceTree = "<group>";
+		};
 		3657C2DB303730E800908AE2 /* GestaltX */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -71,6 +84,12 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A671BC8CF07E4D73975D7915 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3657C2D6303730E800908AE2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
@@ -117,6 +136,7 @@
 				114E4B0927714FB5809477BA /* Shared */,
 				549A67A15B582DE039CCAEE7 /* ShareExtension */,
 				D0ECEAEAA02D01A984128CA5 /* Configuration */,
+				A671BC8CF07E4D73975D7914 /* NavigationUITests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +145,7 @@
 			children = (
 				3657C2D9303730E800908AE2 /* GestaltX.app */,
 				9EABFACA1DBDA148BE33107B /* GestaltXShare.appex */,
+				A671BC8CF07E4D73975D7913 /* GestaltXNavigationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +183,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A671BC8CF07E4D73975D7911 /* GestaltXNavigationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A671BC8CF07E4D73975D7916 /* Build configuration list for PBXNativeTarget "GestaltXNavigationTests" */;
+			buildPhases = (
+				A671BC8CF07E4D73975D7917 /* Sources */,
+				A671BC8CF07E4D73975D7915 /* Frameworks */,
+			);
+			buildRules = ();
+			dependencies = (
+				A671BC8CF07E4D73975D7918 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A671BC8CF07E4D73975D7914 /* NavigationUITests */,
+			);
+			name = GestaltXNavigationTests;
+			productName = GestaltXNavigationTests;
+			productReference = A671BC8CF07E4D73975D7913 /* GestaltXNavigationTests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		3657C2D8303730E800908AE2 /* GestaltX */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3657C2E4303730E900908AE2 /* Build configuration list for PBXNativeTarget "GestaltX" */;
@@ -211,6 +251,10 @@
 				LastSwiftUpdateCheck = 2700;
 				LastUpgradeCheck = 2700;
 				TargetAttributes = {
+					A671BC8CF07E4D73975D7911 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 3657C2D8303730E800908AE2;
+					};
 					3657C2D8303730E800908AE2 = {
 						CreatedOnToolsVersion = 27.0;
 						LastSwiftMigration = 2700;
@@ -240,6 +284,7 @@
 			targets = (
 				3657C2D8303730E800908AE2 /* GestaltX */,
 				E14645B6DD100C2080D40483 /* GestaltXShare */,
+				A671BC8CF07E4D73975D7911 /* GestaltXNavigationTests */,
 			);
 		};
 /* End PBXProject section */
@@ -261,6 +306,12 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A671BC8CF07E4D73975D7917 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3657C2D5303730E800908AE2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
@@ -283,6 +334,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A671BC8CF07E4D73975D7918 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3657C2D8303730E800908AE2 /* GestaltX */;
+			targetProxy = A671BC8CF07E4D73975D7912 /* PBXContainerItemProxy */;
+		};
 		207B17830B74CE408FA240C3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GestaltXShare;
@@ -292,6 +348,38 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		A671BC8CF07E4D73975D7919 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.huami.gestultx.NavigationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GestaltX;
+			};
+			name = Debug;
+		};
+		A671BC8CF07E4D73975D7920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.huami.gestultx.NavigationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GestaltX;
+			};
+			name = Release;
+		};
 		3657C2E2303730E900908AE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -566,6 +654,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A671BC8CF07E4D73975D7916 /* Build configuration list for PBXNativeTarget "GestaltXNavigationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A671BC8CF07E4D73975D7919 /* Debug */,
+				A671BC8CF07E4D73975D7920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		3657C2D4303730E800908AE2 /* Build configuration list for PBXProject "GestaltX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

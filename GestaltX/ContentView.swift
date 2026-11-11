@@ -5,6 +5,11 @@ import SwiftUI
 struct SharedFile: Identifiable { let id = UUID(); let url: URL }
 
 struct ContentView: View {
+    private enum ToolsDestination: Hashable {
+        case category(CapabilityCategory)
+        case log
+    }
+
     @StateObject private var model = GestaltManager()
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -23,6 +28,7 @@ struct ContentView: View {
     @AppStorage("GestaltX.showAdvanced.v1") private var showsAdvanced = false
     @AppStorage("GestaltX.showMGControl.v1") private var showsMGControl = true
     @State private var selectedTab = 0
+    @State private var toolsDestination: ToolsDestination?
     @State private var didStart = false
     @State private var didAutoRead = false
     #if targetEnvironment(simulator)
@@ -32,7 +38,16 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            NavigationStack { tools }
+            NavigationStack {
+                tools.navigationDestination(item: $toolsDestination) { destination in
+                    switch destination {
+                    case .category(let category):
+                        CategoryView(category: category).toolbar(.visible, for: .navigationBar)
+                    case .log:
+                        SessionLogView().toolbar(.visible, for: .navigationBar)
+                    }
+                }
+            }
                 .tabItem { Label(L("Tools"), systemImage: "square.grid.2x2") }.tag(0)
             if showsMGControl {
                 NavigationStack { FieldsView() }
@@ -277,15 +292,16 @@ struct ContentView: View {
             Section("MobileGestalt") {
                 LazyVGrid(columns: toolColumns, spacing: 12) {
                     ForEach(visibleCategories) { category in
-                        NavigationLink {
-                            CategoryView(category: category).toolbar(.visible, for: .navigationBar)
+                        Button {
+                            toolsDestination = .category(category)
                         } label: {
                             toolButtonLabel(category.rawValue, systemImage: category.symbol)
                         }
+                        .buttonStyle(.bordered)
+                        .accessibilityIdentifier("category-\(category.rawValue)")
                         .disabled(!model.hasDocument || model.isBusy)
                     }
                 }
-                .buttonStyle(.bordered)
                 .padding(.vertical, 4)
             }
             Section(L("Actions")) { toolActions }
@@ -329,12 +345,13 @@ struct ContentView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(model.isBusy || model.changeCount > 0)
-                NavigationLink {
-                    SessionLogView().toolbar(.visible, for: .navigationBar)
+                Button {
+                    toolsDestination = .log
                 } label: {
                     toolButtonLabel("Log", systemImage: "text.alignleft")
                 }
                 .buttonStyle(.bordered)
+                .accessibilityIdentifier("session-log")
             }
         }
         .padding(.vertical, 4)
