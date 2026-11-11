@@ -63,14 +63,24 @@ jobs:
       - name: Test category navigation
         # Historical tags can predate this regression test.
         if: hashFiles('.github/scripts/test-navigation.sh') != ''
+        timeout-minutes: 15
         run: bash .github/scripts/test-navigation.sh
+
+      - name: Export navigation screenshots
+        if: always() && hashFiles('build/navigation-tests.xcresult/Info.plist') != ''
+        run: |
+          xcrun xcresulttool export attachments \
+            --path build/navigation-tests.xcresult \
+            --output-path build/navigation-screenshots
 
       - name: Upload navigation test results
         if: always() && hashFiles('build/navigation-tests.xcresult/Info.plist') != ''
         uses: actions/upload-artifact@v7
         with:
           name: Navigation-test-results
-          path: build/navigation-tests.xcresult
+          path: |
+            build/navigation-tests.xcresult
+            build/navigation-screenshots
           retention-days: 14
 
       - name: Build IPA

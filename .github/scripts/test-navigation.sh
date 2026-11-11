@@ -28,9 +28,12 @@ xcodebuild -quiet test \
   -scheme GestaltXNavigationTests \
   -configuration Debug \
   "${destinations[@]}" \
+  -disable-concurrent-destination-testing \
   -parallel-testing-enabled NO \
+  -test-timeouts-enabled YES \
+  -maximum-test-execution-time-allowance 120 \
   -resultBundlePath build/navigation-tests.xcresult \
-  CODE_SIGNING_ALLOWED=NO \
+  CODE_SIGNING_ALLOWED=YES \
   CODE_SIGNING_REQUIRED=NO \
-  CODE_SIGN_IDENTITY="" \
+  CODE_SIGN_IDENTITY="-" \
   DEVELOPMENT_TEAM=""
