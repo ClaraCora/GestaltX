@@ -1,4 +1,7 @@
 {
+  "Settings": "تنظیمات",
+  "Main Screen": "صفحهٔ اصلی",
+  "Tab Bar": "نوار زبانه‌ها",
   "Special Thanks": "سپاس ویژه",
   "Supported": "پشتیبانی می‌شود",
   "Unsupported": "پشتیبانی نمی‌شود",
@@ -300,7 +303,7 @@
   "This device's identity could not be verified. Read MobileGestalt on this device and try sharing again.": "هویت این دستگاه تأیید نشد. ابتدا MobileGestalt را روی همین دستگاه بخوانید و دوباره فایل را به اشتراک بگذارید.",
   "This plist belongs to another device and cannot be imported.": "شناسه‌های این plist با دستگاه فعلی مطابقت ندارند و فایل قابل وارد کردن نیست.",
   "This plist does not contain enough device identifiers to verify ownership.": "این plist شناسه‌های کافی برای تأیید تعلق به دستگاه فعلی ندارد.",
-  "Additional Options": "گزینه‌های بیشتر",
+  "Unlock China-Mainland Restrictions": "رفع محدودیت‌های دستگاه‌های مخصوص سرزمین اصلی چین",
   "MG Control": "کنترل MG",
   "Read MobileGestalt in Tools, or share this device's plist to GestaltX.": "MobileGestalt را در ابزارها بخوانید یا plist همین دستگاه را با GestaltX به اشتراک بگذارید.",
   "This plist has been verified for this device. Import it?": "این plist برای همین دستگاه تأیید شده است. فایل وارد شود؟",

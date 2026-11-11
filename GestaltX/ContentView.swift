@@ -7,6 +7,7 @@ struct SharedFile: Identifiable { let id = UUID(); let url: URL }
 struct ContentView: View {
     @StateObject private var model = GestaltManager()
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var importOffer: PlistImportOffer?
     @State private var showsImportConfirmation = false
     @State private var isCheckingSharedImport = false
@@ -17,6 +18,10 @@ struct ContentView: View {
     @State private var asksImportedRestore = false
     @State private var showsShareNotice = false
     @AppStorage("GestaltX.sharedImportNotice.v1") private var sharedImportNoticeShown = false
+    @AppStorage("GestaltX.showDisplay.v1") private var showsDisplay = false
+    @AppStorage("GestaltX.showIPad.v1") private var showsIPad = false
+    @AppStorage("GestaltX.showAdvanced.v1") private var showsAdvanced = false
+    @AppStorage("GestaltX.showMGControl.v1") private var showsMGControl = true
     @State private var selectedTab = 0
     @State private var didStart = false
     @State private var didAutoRead = false
@@ -29,8 +34,10 @@ struct ContentView: View {
         TabView(selection: $selectedTab) {
             NavigationStack { tools }
                 .tabItem { Label(L("Tools"), systemImage: "square.grid.2x2") }.tag(0)
-            NavigationStack { FieldsView() }
-                .tabItem { Label(L("MG Control"), systemImage: "slider.horizontal.3") }.tag(1)
+            if showsMGControl {
+                NavigationStack { FieldsView() }
+                    .tabItem { Label(L("MG Control"), systemImage: "slider.horizontal.3") }.tag(1)
+            }
             NavigationStack { BackupsView(share: { sharesFile = SharedFile(url: $0) }) }
                 .tabItem { Label(L("Backups"), systemImage: "clock.arrow.circlepath") }.tag(2)
             NavigationStack { AboutView() }
@@ -114,6 +121,9 @@ struct ContentView: View {
         .onChange(of: scenePhase) { _, phase in
             if phase == .active && !isPreviewSession { Task { await checkSharedImport() } }
         }
+        .onChange(of: showsMGControl) { _, isShown in
+            if !isShown && selectedTab == 1 { selectedTab = 0 }
+        }
         .onChange(of: canPresentSharedImport) { _, ready in
             if ready && pendingSharedImport && !isCheckingSharedImport {
                 Task { await resumeSharedImports() }
@@ -132,7 +142,7 @@ struct ContentView: View {
                 await model.open(URL(fileURLWithPath: arguments[flag + 1]))
             }
             if let flag = arguments.firstIndex(of: "--preview-tab"), arguments.indices.contains(flag + 1), let tab = Int(arguments[flag + 1]) {
-                selectedTab = tab
+                selectedTab = tab == 1 && !showsMGControl ? 0 : tab
             }
             if arguments.contains("--preview-review") {
                 if !arguments.contains("--preview-cache-option") { model.choices["pencil"] = .enable }
@@ -246,59 +256,135 @@ struct ContentView: View {
         showsShareNotice = true
     }
 
+    private var visibleCategories: [CapabilityCategory] {
+        CapabilityCategory.allCases.filter { category in
+            switch category {
+            case .display: showsDisplay
+            case .ipad: showsIPad
+            case .advanced: showsAdvanced
+            case .device, .intelligence: true
+            }
+        }
+    }
+
+    private var toolColumns: [GridItem] {
+        Array(repeating: GridItem(.flexible(), spacing: 12), count: dynamicTypeSize.isAccessibilitySize ? 1 : 2)
+    }
+
     private var tools: some View {
         Form {
-            Section(L("Device")) {
-                LabeledContent(L("Model"), value: model.hasDocument ? model.displayedName : UIDevice.current.model)
-                LabeledContent("iOS", value: "\(UIDevice.current.systemVersion) (\(VersionSupport.label))")
-                LabeledContent(L("Status"), value: L(model.hasDocument ? (model.sourceIsDevice ? "Connected" : "Local File") : (model.isBusy ? "Reading…" : "Not Loaded")))
-                if let document = model.working {
-                    LabeledContent("CacheExtra", value: String(document.extra.count))
-                }
-            }
-            Section {
-                Button { Task { await model.connect() } } label: {
-                    Label(L(model.isBusy ? "Reading…" : model.hasDocument ? "Read Again" : "Read MobileGestalt"), systemImage: "arrow.clockwise")
-                }.disabled(model.isBusy || model.changeCount > 0)
-            }
+            Section(L("Device")) { deviceSummary }
             Section("MobileGestalt") {
-                ForEach(CapabilityCategory.allCases) { category in
-                    NavigationLink { CategoryView(category: category) } label: {
-                        Label(L(category.rawValue), systemImage: category.symbol)
+                LazyVGrid(columns: toolColumns, spacing: 12) {
+                    ForEach(visibleCategories) { category in
+                        NavigationLink {
+                            CategoryView(category: category).toolbar(.visible, for: .navigationBar)
+                        } label: {
+                            toolButtonLabel(category.rawValue, systemImage: category.symbol)
+                        }
+                        .disabled(!model.hasDocument || model.isBusy)
                     }
-                    .disabled(!model.hasDocument || model.isBusy)
                 }
+                .buttonStyle(.bordered)
+                .padding(.vertical, 4)
             }
-            Section(L("Actions")) {
-                if model.snapshot?.source == .local && model.snapshot?.ownershipVerified == true {
-                    Button { asksImportedRestore = true } label: { Label(L("Restore Imported Plist"), systemImage: "arrow.uturn.backward") }
-                        .disabled(!model.canRestoreImportedPlist)
-                }
-                Button { showsChanges = true } label: {
-                    HStack {
-                        Label(L("Apply Changes"), systemImage: "checkmark")
-                        Spacer()
-                        if model.changeCount > 0 { Text(String(model.changeCount)).foregroundStyle(.secondary) }
-                    }
-                }.disabled(model.changeCount == 0 || model.isBusy)
-                Button(L("Discard Changes"), role: .destructive) { model.clearStaged() }
-                    .disabled(model.changeCount == 0 || model.isBusy)
-                Button { Task { await model.backup() } } label: { Label(L("Create Backup"), systemImage: "externaldrive.badge.plus") }
-                    .disabled(!model.hasDocument || model.isBusy)
-                Button {
-                    if let url = model.exportDocument() { sharesFile = SharedFile(url: url) }
-                } label: { Label(L("Export Plist"), systemImage: "square.and.arrow.up") }
-                    .disabled(!model.hasDocument || model.isBusy)
-                Button { asksRespring = true } label: { Label(L("Respring"), systemImage: "arrow.trianglehead.2.clockwise.rotate.90") }
-                    .disabled(model.isBusy)
-            }
+            Section(L("Actions")) { toolActions }
             if model.needsRespring {
                 Section { Label(L("Some changes require a device restart."), systemImage: "info.circle").font(.footnote).foregroundStyle(.secondary) }
             }
-            Section { NavigationLink { SessionLogView() } label: { Label(L("Log"), systemImage: "text.alignleft") } }
         }
-        .navigationTitle("GestaltX")
-        .toolbar { ToolbarItem(placement: .topBarTrailing) { if model.isBusy { ProgressView() } } }
+        .listSectionSpacing(16)
+        .contentMargins(.top, 8, for: .scrollContent)
+        .toolbar(.hidden, for: .navigationBar)
+    }
+
+    private var deviceSummary: some View {
+        VStack(spacing: 12) {
+            VStack(spacing: 8) {
+                LabeledContent {
+                    Text(model.hasDocument ? model.displayedName : UIDevice.current.model)
+                        .fontWeight(.semibold).fixedSize(horizontal: false, vertical: true)
+                } label: { Text(L("Model")) }
+                LabeledContent {
+                    Text("\(UIDevice.current.systemVersion) (\(VersionSupport.label))")
+                        .fixedSize(horizontal: false, vertical: true)
+                } label: { Text("iOS") }
+                LabeledContent(L("Status")) {
+                    HStack(spacing: 8) {
+                        if model.isBusy { ProgressView().controlSize(.small) }
+                        Text(L(model.hasDocument ? (model.sourceIsDevice ? "Connected" : "Local File") : (model.isBusy ? "Reading…" : "Not Loaded")))
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                if let document = model.working {
+                    LabeledContent("CacheExtra", value: String(document.extra.count)).monospacedDigit()
+                }
+            }
+            .font(.subheadline)
+            .multilineTextAlignment(.trailing)
+            Divider()
+            LazyVGrid(columns: toolColumns, spacing: 12) {
+                Button { Task { await model.connect() } } label: {
+                    toolButtonLabel(model.isBusy ? "Reading…" : model.hasDocument ? "Read Again" : "Read MobileGestalt", systemImage: "arrow.clockwise")
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(model.isBusy || model.changeCount > 0)
+                NavigationLink {
+                    SessionLogView().toolbar(.visible, for: .navigationBar)
+                } label: {
+                    toolButtonLabel("Log", systemImage: "text.alignleft")
+                }
+                .buttonStyle(.bordered)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+
+    private var toolActions: some View {
+        LazyVGrid(columns: toolColumns, spacing: 12) {
+            Button { showsChanges = true } label: {
+                toolButtonLabel("Apply Changes", systemImage: "checkmark", count: model.changeCount > 0 ? model.changeCount : nil)
+            }
+            .buttonStyle(.borderedProminent)
+            .disabled(model.changeCount == 0 || model.isBusy)
+            Button(role: .destructive) { model.clearStaged() } label: {
+                toolButtonLabel("Discard Changes", systemImage: "xmark")
+            }
+            .tint(.red)
+            .disabled(model.changeCount == 0 || model.isBusy)
+            Button { Task { await model.backup() } } label: {
+                toolButtonLabel("Create Backup", systemImage: "externaldrive.badge.plus")
+            }
+            .disabled(!model.hasDocument || model.isBusy)
+            Button {
+                if let url = model.exportDocument() { sharesFile = SharedFile(url: url) }
+            } label: {
+                toolButtonLabel("Export Plist", systemImage: "square.and.arrow.up")
+            }
+            .disabled(!model.hasDocument || model.isBusy)
+            Button { asksRespring = true } label: {
+                toolButtonLabel("Respring", systemImage: "arrow.trianglehead.2.clockwise.rotate.90")
+            }
+            .disabled(model.isBusy)
+            if model.snapshot?.source == .local && model.snapshot?.ownershipVerified == true {
+                Button { asksImportedRestore = true } label: {
+                    toolButtonLabel("Restore Imported Plist", systemImage: "arrow.uturn.backward")
+                }
+                .disabled(!model.canRestoreImportedPlist)
+            }
+        }
+        .buttonStyle(.bordered)
+        .padding(.vertical, 4)
+    }
+
+    private func toolButtonLabel(_ title: String, systemImage: String, count: Int? = nil) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: systemImage)
+            Text(L(title)).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
+            if let count { Text(String(count)).font(.caption.weight(.semibold)).monospacedDigit() }
+        }
+        .font(.subheadline.weight(.medium))
+        .frame(maxWidth: .infinity, minHeight: 44)
     }
 }
 
@@ -434,7 +520,7 @@ struct AdditionalOptionsRow: View {
         switch support {
         case .success:
             VStack(alignment: .leading, spacing: 8) {
-                Picker(L("Additional Options"), selection: Binding(
+                Picker(L("Unlock China-Mainland Restrictions"), selection: Binding(
                     get: { model.cacheOptionChoice },
                     set: { model.stageCacheOption($0) }
                 )) {
@@ -456,7 +542,7 @@ struct AdditionalOptionsRow: View {
             }
         case .failure(let error):
             VStack(alignment: .leading, spacing: 4) {
-                LabeledContent(L("Additional Options")) { Text(L("Unsupported")).foregroundStyle(.secondary) }
+                LabeledContent(L("Unlock China-Mainland Restrictions")) { Text(L("Unsupported")).foregroundStyle(.secondary) }
                 Text(error.localizedDescription).font(.caption).foregroundStyle(.secondary)
             }
         }

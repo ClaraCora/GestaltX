@@ -18,7 +18,7 @@ A MobileGestalt editor for iPhone and iPad. Developed by [huamidev](https://gith
 | Category | Presets and tools |
 | --- | --- |
 | Display | Dynamic Island capability and layout, Always-On Display, AOD Vibrancy, high-luminance AOD, AOD flipbook, HDR photo display, wallpaper parallax, Liquid Glass low-power rendering, experimental PWM and DisplayPort flags |
-| Device | Model name, boot/shutdown chime, charge limit, tap to wake, Camera Control settings, Action Button settings, Collision SOS, Audio Mix, Spatial FaceTime audio |
+| Device | Model name, boot/shutdown chime, charge limit, tap to wake, Camera Control settings, Action Button settings, Collision SOS, Audio Mix, Spatial FaceTime audio, Unlock China-Mainland Restrictions |
 | iPad | Apple Pencil settings, Stage Manager capability, iPad app compatibility |
 | Intelligence | Independent region-code options, Apple Intelligence capability flag, on-device Siri, Audio Intelligence, Personal Translator, Photos Clean Up, Handwriting Synthesis, always-listening Hey Siri, and sales-region options for activation attempts on China-mainland devices |
 | Advanced | Apple internal feature flags, internal storage view, internal settings bundle, Security Research Device flag |
@@ -30,6 +30,10 @@ A MobileGestalt editor for iPhone and iPad. Developed by [huamidev](https://gith
 Usually, changing the region code is enough to try enabling AI; there is no need to change Sales Region. Selecting United States for Region Code sets `RegionCode` to `LL` and keeps the sales-region suffix. You can also choose China (Mainland), Hong Kong, Taiwan, Japan or the United Kingdom. Sales Region and Region Code can be applied together: the sales suffix follows Sales Region, while the code follows Region Code.
 
 *If you previously changed Sales Region, restore your device’s original sales region and apply it first.*
+
+The main screen shows only Device and Intelligence by default. Under **About → Settings**, you can show Display, iPad and Advanced individually, and show or hide the MG Control tab (shown by default). Preferences are saved automatically.
+
+**Unlock China-Mainland Restrictions** is shown directly under **Tools → Device → Presets**, without tapping the About version string. Read MobileGestalt or import a verified plist from this device, select **Enable** to stage the change, then review and apply it. **Disable (Restore Original)** restores the recorded original values. This preset changes regional capability flags; actual effects depend on the device and OS.
 
 Disabling a preset or using its Revert button restores the recorded original values and types. Keys that were originally absent are removed. If an older change has no original record, use Remove Added Fields only when you know those fields were added.
 

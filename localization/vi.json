@@ -1,4 +1,7 @@
 {
+  "Settings": "Cài đặt",
+  "Main Screen": "Màn hình chính",
+  "Tab Bar": "Thanh tab",
   "Special Thanks": "Đặc biệt cảm ơn",
   "Supported": "Được hỗ trợ",
   "Unsupported": "Không được hỗ trợ",
@@ -300,7 +303,7 @@
   "This device's identity could not be verified. Read MobileGestalt on this device and try sharing again.": "Không thể xác minh danh tính thiết bị này. Đọc MobileGestalt trên thiết bị này rồi chia sẻ lại.",
   "This plist belongs to another device and cannot be imported.": "Mã định danh trong plist không khớp thiết bị này nên không thể nhập.",
   "This plist does not contain enough device identifiers to verify ownership.": "Plist không có đủ mã định danh để xác minh thuộc thiết bị này.",
-  "Additional Options": "Tùy chọn bổ sung",
+  "Unlock China-Mainland Restrictions": "Gỡ hạn chế cho thiết bị Trung Quốc đại lục",
   "MG Control": "Điều khiển MG",
   "Read MobileGestalt in Tools, or share this device's plist to GestaltX.": "Đọc MobileGestalt trong Công cụ hoặc chia sẻ plist của thiết bị này đến GestaltX.",
   "This plist has been verified for this device. Import it?": "Plist đã được xác minh cho thiết bị này. Nhập tệp?",

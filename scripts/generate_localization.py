@@ -5,6 +5,9 @@ TRANSLATIONS = '''
 WAPI	WAPI
 Disable WAPI	关闭 WAPI
 Restore Original	恢复原值
+Settings	设置
+Main Screen	主界面
+Tab Bar	底部导航栏
 Special Thanks	特别鸣谢
 
 Supported	支持
@@ -312,7 +315,7 @@ Open GestaltX to confirm importing the plist.	请打开 GestaltX 确认导入 pl
 This device's identity could not be verified. Read MobileGestalt on this device and try sharing again.	无法核验本机身份，请先读取本机 MobileGestalt 后重新分享。
 This plist belongs to another device and cannot be imported.	此 plist 的设备标识与本机不符，无法导入。
 This plist does not contain enough device identifiers to verify ownership.	此 plist 缺少足够的设备标识，无法确认属于本机。
-Additional Options	附加选项
+Unlock China-Mainland Restrictions	解锁国行限制
 MG Control	MG 控制
 Read MobileGestalt in Tools, or share this device's plist to GestaltX.	在工具中读取 MobileGestalt，或将本机 plist 分享到 GestaltX。
 This plist has been verified for this device. Import it?	已核验此 plist 属于本机，是否导入？

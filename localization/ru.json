@@ -1,4 +1,7 @@
 {
+  "Settings": "Настройки",
+  "Main Screen": "Главный экран",
+  "Tab Bar": "Панель вкладок",
   "Special Thanks": "Особая благодарность",
   "Supported": "Поддерживается",
   "Unsupported": "Не поддерживается",
@@ -300,7 +303,7 @@
   "This device's identity could not be verified. Read MobileGestalt on this device and try sharing again.": "Не удалось проверить идентификаторы устройства. Считайте MobileGestalt на этом устройстве и отправьте файл повторно.",
   "This plist belongs to another device and cannot be imported.": "Идентификаторы в plist не совпадают с этим устройством. Импорт невозможен.",
   "This plist does not contain enough device identifiers to verify ownership.": "В plist недостаточно идентификаторов для проверки принадлежности устройству.",
-  "Additional Options": "Дополнительные параметры",
+  "Unlock China-Mainland Restrictions": "Снять ограничения устройств для материкового Китая",
   "MG Control": "Управление MG",
   "Read MobileGestalt in Tools, or share this device's plist to GestaltX.": "Считайте MobileGestalt в разделе инструментов или отправьте plist этого устройства в GestaltX.",
   "This plist has been verified for this device. Import it?": "Этот plist проверен для данного устройства. Импортировать?",

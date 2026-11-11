@@ -1,4 +1,7 @@
 {
+  "Settings": "설정",
+  "Main Screen": "메인 화면",
+  "Tab Bar": "탭 막대",
   "Special Thanks": "감사의 글",
   "Supported": "지원됨",
   "Unsupported": "지원되지 않음",
@@ -300,7 +303,7 @@
   "This device's identity could not be verified. Read MobileGestalt on this device and try sharing again.": "이 기기의 식별 정보를 확인할 수 없습니다. 이 기기에서 MobileGestalt를 읽은 다음 다시 공유해 보십시오.",
   "This plist belongs to another device and cannot be imported.": "이 plist는 다른 기기의 것이므로 가져올 수 없습니다.",
   "This plist does not contain enough device identifiers to verify ownership.": "이 plist에는 소유권을 확인할 수 있는 기기 식별자가 충분하지 않습니다.",
-  "Additional Options": "추가 옵션",
+  "Unlock China-Mainland Restrictions": "중국 본토 모델 제한 해제",
   "MG Control": "MG Control",
   "Read MobileGestalt in Tools, or share this device's plist to GestaltX.": "도구에서 MobileGestalt를 읽거나, 이 기기의 plist를 GestaltX로 공유하십시오.",
   "This plist has been verified for this device. Import it?": "이 plist는 이 기기용으로 검증되었습니다. 가져오시겠습니까?",

@@ -21,6 +21,7 @@ struct AboutView: View {
                 }
             }
             Section {
+                NavigationLink { SettingsView() } label: { Label(L("Settings"), systemImage: "gearshape") }
                 LabeledContent(L("Minimum OS"), value: "iOS 26.0")
                 NavigationLink { CompatibilityView() } label: { Label(L("Compatibility"), systemImage: "iphone.badge.checkmark") }
             }
@@ -62,6 +63,28 @@ struct AboutView: View {
         .multilineTextAlignment(.center)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 8)
+    }
+}
+
+struct SettingsView: View {
+    @AppStorage("GestaltX.showDisplay.v1") private var showsDisplay = false
+    @AppStorage("GestaltX.showIPad.v1") private var showsIPad = false
+    @AppStorage("GestaltX.showAdvanced.v1") private var showsAdvanced = false
+    @AppStorage("GestaltX.showMGControl.v1") private var showsMGControl = true
+
+    var body: some View {
+        Form {
+            Section(L("Main Screen")) {
+                Toggle(L("Display"), isOn: $showsDisplay)
+                Toggle(L("iPad"), isOn: $showsIPad)
+                Toggle(L("Advanced"), isOn: $showsAdvanced)
+            }
+            Section(L("Tab Bar")) {
+                Toggle(L("MG Control"), isOn: $showsMGControl)
+            }
+        }
+        .navigationTitle(L("Settings"))
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

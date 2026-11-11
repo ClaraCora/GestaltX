@@ -157,6 +157,162 @@
         }
       }
     },
+    "Settings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تنظیمات"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Настройки"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cài đặt"
+          }
+        },
+        "zh-Hant-HK": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
+          }
+        },
+        "zh-Hant-TW": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
+          }
+        }
+      }
+    },
+    "Main Screen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main Screen"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "主界面"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صفحهٔ اصلی"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메인 화면"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Главный экран"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Màn hình chính"
+          }
+        },
+        "zh-Hant-HK": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "主介面"
+          }
+        },
+        "zh-Hant-TW": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "主介面"
+          }
+        }
+      }
+    },
+    "Tab Bar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tab Bar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "底部导航栏"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نوار زبانه‌ها"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "탭 막대"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Панель вкладок"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thanh tab"
+          }
+        },
+        "zh-Hant-HK": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "底部分頁列"
+          }
+        },
+        "zh-Hant-TW": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "底部分頁列"
+          }
+        }
+      }
+    },
     "Special Thanks": {
       "localizations": {
         "en": {
@@ -15809,54 +15965,54 @@
         }
       }
     },
-    "Additional Options": {
+    "Unlock China-Mainland Restrictions": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Additional Options"
+            "value": "Unlock China-Mainland Restrictions"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "附加选项"
+            "value": "解锁国行限制"
           }
         },
         "fa": {
           "stringUnit": {
             "state": "translated",
-            "value": "گزینه‌های بیشتر"
+            "value": "رفع محدودیت‌های دستگاه‌های مخصوص سرزمین اصلی چین"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "추가 옵션"
+            "value": "중국 본토 모델 제한 해제"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Дополнительные параметры"
+            "value": "Снять ограничения устройств для материкового Китая"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tùy chọn bổ sung"
+            "value": "Gỡ hạn chế cho thiết bị Trung Quốc đại lục"
           }
         },
         "zh-Hant-HK": {
           "stringUnit": {
             "state": "translated",
-            "value": "附加選項"
+            "value": "解除中國大陸機型限制"
           }
         },
         "zh-Hant-TW": {
           "stringUnit": {
             "state": "translated",
-            "value": "附加選項"
+            "value": "解鎖中國大陸機型限制"
           }
         }
       }
